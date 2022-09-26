@@ -1,0 +1,618 @@
+Pinpon Oyunu
+
+import turtle, winsound
+
+pencere = turtle.Screen()
+pencere.title("PinPong")
+pencere.bgcolor("white")
+pencere.setup(width=800, height=600)
+pencere.tracer(0)
+
+raket_a = turtle.Turtle()
+raket_a.speed(2)
+raket_a.shape('square')
+raket_a.color('yellow')
+raket_a.penup()
+raket_a.goto(-350, 0)
+raket_a.shapesize(7, 1)
+
+raket_b = turtle.Turtle()
+raket_b.speed(2)
+raket_b.shape('square')
+raket_b.color('blue')
+raket_b.penup()
+raket_b.goto(350, 0)
+raket_b.shapesize(7, 1)
+
+ball = turtle.Turtle()
+ball.speed(0)
+ball.shape('circle')
+ball.color('red')
+ball.shapesize(1.5)
+ball.penup()
+ball.dx = 0.3
+ball.dy = 0.3
+
+yazi = turtle.Turtle()
+yazi.speed(0)
+yazi.color('black')
+yazi.penup()
+yazi.goto(0, 260)
+yazi.write("Sarı Takım:0   Mavi Takım:0", align='center', font=('Courier', 24, 'bold'))
+yazi.hideturtle()
+puan_a = 0
+puan_b = 0
+
+def raket_a_up():
+    y = raket_a.ycor()
+    y = y + 20
+    raket_a.sety(y)
+
+def raket_a_down():
+    y = raket_a.ycor()
+    y = y - 20
+    raket_a.sety(y)
+
+def raket_b_up():
+    y = raket_b.ycor()
+    y = y + 20
+    raket_b.sety(y)
+
+def raket_b_down():
+    y = raket_b.ycor()
+    y = y - 20
+    raket_b.sety(y)
+
+pencere.listen()
+pencere.onkeypress(raket_a_up, 'w')
+pencere.onkeypress(raket_a_down, 's')
+pencere.onkeypress(raket_b_up, 'Up')
+pencere.onkeypress(raket_b_down, 'Down')
+
+while True:
+        pencere.update()
+        ball.setx(ball.xcor() + ball.dx)
+        ball.sety(ball.ycor() + ball.dy)
+
+        if ball.ycor() > 285 or ball.ycor() < -285:
+            ball.dy = ball.dy * -1
+        if ball.xcor() > 385:
+            winsound.PlaySound('bounce.wav', winsound.SND_ASYNC)
+            ball.goto(0, 0)
+            ball.dx = ball.dx * -1
+            puan_a = puan_a + 1
+            yazi.clear()
+            yazi.write("Sarı Takım:{}   Mavi Takım:{}".format(puan_a, puan_b), align='center', font=('Courier', 24, 'bold'))
+        if ball.xcor() < -385:
+            winsound.PlaySound('bounce.wav', winsound.SND_ASYNC)
+            ball.goto(0, 0)
+            ball.dx = ball.dx * -1
+            puan_b = puan_b + 1
+            yazi.clear()
+            yazi.write("Sarı Takım:{}   Mavi Takım:{}".format(puan_a, puan_b), align='center', font=('Courier', 24, 'bold'))
+
+        if (ball.xcor() > 335 and ball.xcor() < 350) and (
+                ball.ycor() < raket_b.ycor() + 70 and ball.ycor() > raket_b.ycor() - 70):
+            winsound.PlaySound('bounce.wav', winsound.SND_ASYNC)
+            ball.setx(335)
+            ball.dx = ball.dx * -1
+        if (ball.xcor() < -335 and ball.xcor() > -350) and (
+                ball.ycor() < raket_a.ycor() + 70 and ball.ycor() > raket_a.ycor() - 70):
+            winsound.PlaySound('bounce.wav', winsound.SND_ASYNC)
+            ball.setx(-335)
+            ball.dx = ball.dx * -1
+        if (puan_a == 5):
+            yazi.clear()
+            yazi.write("Oyun Bitti.Sarı Takım Kazandı.",align='center', font=('Courier', 24, 'bold'))
+            ball.dx = 0
+        if (puan_b == 5):
+            yazi.clear()
+            yazi.write("Oyun Bitti.Mavi Takım Kazandı.", align='center', font=('Courier', 24, 'bold'))
+            ball.dx = 0
+
+____________________________________________________________________________________
+Html Sayfalarım
+
+<html>
+<head>
+<title>Sayfalarım</title>
+</head>
+<body>
+<a href = "https://www.twitter.com" target = "_blank"><img src = "HER ŞEY/html/images/twitter.png" width = "235" border = "5"></a>
+<a href = "https://www.youtube.com" target = "_blank"><img src = "HER ŞEY/html/images/youtube.png" width = "235" border = "5"></a>
+<a href = "https://ues.marmara.edu.tr/Account/LoginBefore" target = "_blank"><img src = "HER ŞEY/html/images/ues.png" width = "235" border = "5"></a>
+<a href = "https://bys.marmara.edu.tr/v2/Account/Login" target = "_blank"><img src = "HER ŞEY/html/images/bys.png" width = "235" border = "5"></a>
+<a href = "https://web.whatsapp.com/" target = "_blank"><img src = "HER ŞEY/html/images/whatsapp.png" width = "235" border = "5"></a>
+<a href = "https://mail.google.com/mail/u/0/#inbox" target = "_blank"><img src = "HER ŞEY/html/images/gmail.png" width = "235" border = "5"></a>
+<a href = "https://www.binance.com/tr" target = "_blank"><img src = "HER ŞEY/html/images/binance.png" width = "235" border = "5"></a>
+<a href = "https://www.instagram.com/" target = "_blank"><img src = "HER ŞEY/html/images/instagram.png" width = "235" border = "5"></a>
+<a href = "https://www.twitch.tv/" target = "_blank"><img src = "HER ŞEY/html/images/twitch.png" width = "235" border = "5"></a>
+<a href = "https://lichess.org/" target = "_blank"><img src = "HER ŞEY/html/images/lichess.png" width = "235" border = "5"></a>
+<a href = "https://www.chess.com/play/online" target = "_blank"><img src = "HER ŞEY/html/images/chess.png" width = "235" border = "5"></a>
+<a href = "https://www.udemy.com/" target = "_blank"><img src = "HER ŞEY/html/images/udemy.png" width = "235" border = "5"></a>
+<a href = "https://www.ciceksepeti.com/" target = "_blank"><img src = "HER ŞEY/html/images/ciceksepeti.png" width = "235" border = "5"></a>
+<a href = "https://new.edmodo.com/home" target = "_blank"><img src = "HER ŞEY/html/images/edmodo.png" width = "235" border = "5"></a>
+<a href = "https://dentacoin.com/?show-login=true" target = "_blank"><img src = "HER ŞEY/html/images/dentacoin.png" width = "235" border = "5"></a>
+<a href = "https://github.com/AzapAxu" target = "_blank"><img src = "HER ŞEY/html/images/github.png" width = "235" border = "5"></a>
+</body>
+</html>
+
+____________________________________________________________________________________________________________
+3D Printer Calculator
+
+HTML
+------------------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel ="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="style.css">
+    <title>3D Printer Cost Calculator</title>
+    <script src="script.js" defer></script>
+</head>
+<body>
+  <h2 style= text-align:center;font-size:70px>3D Printer Cost Calculator</h2>
+  <div class="mytabs">
+    <input type="radio" id="tabmanual" name="mytabs" checked="checked" style="display:none;">
+    <label for="tabmanual" style="width:350px;text-align:center">Calculate Manually</label>
+    <div class="tab">
+      <div class="manual">
+        <form action="3DPrinterCostCalculator.html" method="POST">
+          Material Type:
+          <div class="select">  
+            <select name="format" id="format">
+              <option selected disabled>Choose Material Type</option>
+              <option value="abs">ABS(Acrylonitrile Butadiene Styrene)</option>
+              <option value="pla">PLA(Polylactic Acid)</option>
+              <option value="petg">PETG(Polyethylene Terephthalate)</option>
+              <option value="pett">PETT(T-Glase filament)</option>
+              <option value="hips">HIPS(High Impact Polystyrene)</option>
+              <option value="tpu">TPU(Thermoplastic Polyurethane)</option>
+            </select><br><br>
+          Currency:  
+            <select name="currency" id="currency">
+              <option selected disabled>Choose Currency</option>
+              <option value="dollar">$</option>
+              <option value="euro">€</option>
+              <option value="pound">£</option>
+              <option value="lira">₺</option>
+            </select><br><br>
+          </div>
+          <br><br>
+          <div class="inputfield">
+            <span class="details">Amount of Filament(g) :</span><input type="text" id="filamount" name="filamount" placeholder="Amount of Filament(g)" required><br><br>
+            <span class="details">Filament Price($/kg) :</span><input type="text" id="filprice" name="filprice" placeholder="Filament Price($/kg)" required><br><br>
+            <span class="details">Printing Time(h) :</span><input type="text" id="time" name="time" placeholder="Printing Time(h)" required><br><br>
+            <h6 style="opacity: 0.5">(Optional)</h6><span class="details">Operator Cost per Hour($) :</span><input type="text" id="labor" name="labor" placeholder="Operator Cost per Hour($)"><br><br>
+            <span class="details">Printer Power Consumption(kWh) :</span><input type="text" id="printpower" name="printpower" placeholder="Printer Power Consumption(kWh)" required><br><br>
+            <span class="details">Printer's Cost($/h) :</span><input type="text" id="printprice" name="printprice" placeholder="Printer's Price($)" required><br><br>
+            <span class="details">Number of Copies :</span><input type="text" id="printnumber" name="printnumber" placeholder="Number of Copies" required><br><br>
+            <span class="details">Markup(%) :</span><input type="text" id="markup" name="markup" placeholder="Markup(%)" required><br><br>
+            <span class="details">Wastage :</span><input type="text" id="wastage" name="wastage" placeholder="Wastage" required><br><br>
+            <span class="details">Taxes(%) :</span><input type="text" id="tax" name="tax" placeholder="Taxes(%)" required><br>
+          </div>
+          <div class="button">
+            <input type="reset" value="Reset"><br><br>
+            <input id ="btn" type="button" value="Calculate">
+          </div>
+          <div>
+            <br><br><p id="p1"></p>
+          </div>
+        </form>
+      </div>
+    </div>
+    <input type="radio" id="tabstl" name="mytabs"  style="display:none;">
+    <label for="tabstl" style="width:350px;text-align:center">Add An STL File</label>
+    <div class="tab">
+      <div class="container">
+        <input type="file" class="upload_hide" id="upload_costum" multiple>
+        <label for="upload_costum"  class="upload_label">
+            <div class="image">
+                <img src="" alt="">
+            </div>
+            <i class="fas fa-cloud-upload-alt"></i>
+            <p class="drag_text">Drag & Drop to Upload Your STL File</p>
+            <p class="drag_text">or</p>
+            <button class="choose_file">Choose a File</button>
+        </label>
+        <button class="delete_file"> Delete File</button>
+      </div>
+    </div>
+
+    <input type="radio" id="tabcst" name="mytabs" style="display:none;">
+    <label for="tabcst" style="width:350px;text-align:center">Final Price</label>
+    <div class="tab">
+      <h2 style="text-align:center;font-size:70px">Your 3D Printing Cost Is;</h2>
+      <table class="content-table" style="margin-left: 75px;">
+        <thead>
+          <tr>
+            <th>Price</th>
+            <th>Material Cost</th>
+            <th>Electric Cost</th>
+            <th>Printer Cost</th>
+            <th>Labor Cost</th>
+            <th>Total Cost</th>
+            <th>Number of Copies</th>
+            <th>Taxes</th>
+            <th>Markup</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><p style="font-size:70px;text-align: center;" id="output"></p></td>
+            <td><p style="font-size:50px;" id = "materialcost"></p></td>
+            <td><p style="font-size:50px;" id = "electriccost"></p></td>
+            <td><p style="font-size:50px;" id = "printercost"></p></td>
+            <td><p style="font-size:50px;" id = "laborcost"></p></td>
+            <td><p style="font-size:50px;" id = "final"></p></td>
+            <td><p style="font-size:50px;" id = "final2"></p></td>
+            <td><p style="font-size:50px;" id = "taxes"></p></td>
+            <td><p style="font-size:50px;" id = "final3"></p></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <script>
+        $('.delete_file').hide();
+        $('#upload_costum').change(function(event) {
+            let tmppath = URL.createObjectURL(event.target.files[0])
+            $('.image > img').fadeIn('fast').attr('src',tmppath)
+            $('.delete_file').show();
+            $('.choose_file').hide();
+
+            $('.delete_file').click(function() {
+                $('.image > img').fadeIn('fast').attr('src','')
+              $('.delete_file').hide();
+              $('.choose_file').show();
+              
+            })
+        })
+  </script>
+</body>
+</html>
+----------------------------------
+Css
+
+
+*{
+    padding:0;
+    margin:0;
+}
+
+body {
+    background-image: url("3DPrinterCostCalculator\static\image.jpg");
+    /*background: #ccc;*/
+    font-family: 'Roboto', sans-serif;
+    padding: 0 10px;
+}
+.mytabs {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 25px;
+}
+
+.mytabs label {
+    padding: 22.347px;
+    font-weight: bold;
+    background: #0f2e61;
+    color: #fff;
+    border:#0f2e61;
+    border-style:groove ;
+
+}
+
+.mytabs .tab {
+    width: 100%;
+    padding: 25px;
+    order: 1;
+    display: none;
+    height: 1000px;
+    background:hsl(0, 0%, 100%);
+}
+.mytabs .tab h2 {
+    font-size: 3em;
+}
+
+.mytabs input[type='radio']:checked + label + .tab {
+    display: block;
+}
+
+.mytabs input[type="radio"]:checked + label {
+    background: #fff;
+    color:black;
+}
+
+container {
+    max-width: 1160px;
+}
+
+.mytabs .tab .manual form{
+    font-size: 20px;
+    font-weight: bold;
+    width: 50%;
+    padding-left: 180px;
+    padding-top: 0px;
+}
+
+.mytabs .tab .manual {
+    order:1;
+    margin: 50px auto;
+    padding: 30px; 
+    max-width: 48em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.mytabs .tab .manual .form inputfield {
+    margin-bottom: 15px;
+    width: calc(100% / 2 - 20px);
+}
+
+.inputfield input{
+    height: 25px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.inputfield input:focus{
+  border-color: #9b59b6;
+}
+
+form .inputfield span.details{
+    /*display: block;*/
+    font-weight: 5000;
+    margin-bottom: 15px;
+}
+
+form .button{
+    height: 45px;
+    margin: 35px 0;
+    margin-left: 20px;
+}
+
+form .button input{
+    height: 100%;
+    max-width: 600px;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #0f2e61, #68778d);
+}
+
+form .button input:hover{
+    /* transform: scale(0.99); */
+    background: linear-gradient(-135deg, #71b7e6, #90a6b5);
+}
+
+select {
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    -ms-appearance:none;
+    appearance:none;
+    outline:0;
+    box-shadow:none;
+    border:0!important;
+    background: #5c6664;
+    background-image: none;
+    flex: 1;
+    padding: 0 .5em;
+    color:#fff;
+    cursor:pointer;
+    font-size: 1em;
+    font-family: 'Open Sans', sans-serif;
+}
+
+select::-ms-expand {
+    display: none;
+ }
+
+ .select {
+    position: relative;
+    display: flex;
+    width: 20em;
+    height: 3em;
+    line-height: 3;
+    background: #5c6664;
+    overflow: hidden;
+    border-radius: .25em;
+ }
+ .select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 1em;
+    background: #2b2e2e;
+    cursor:pointer;
+    pointer-events:none;
+    transition:.25s all ease;
+ }
+ .select:hover::after {
+    color: #23b499;
+ }
+
+.upload_hide {
+    position: absolute;
+    max-width: 200px;
+    max-height: 50px;
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    left: 100%;
+    top: 100%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    opacity: 0;
+}
+
+.upload_label {
+    position: absolute;
+    max-width: 800px;
+    max-height: 300px;
+    width: 100%;
+    height: 100%;
+    margin: 20px !important;
+    border: 2px dashed #139CFF;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    border-radius: 8px;
+    flex-direction: column;
+}
+
+.choose_file {
+    width: 200px;
+    height: 50px;
+    border: none;
+    background-color: #139CFF;
+    color: #fff;
+    border-radius: 3px;
+    margin: 30px auto;
+    pointer-events: none;
+}
+
+.delete_file {
+    width: 200px;
+    height: 50px;
+    border: none;
+    background-color: #139CFF;
+    color: #fff;
+    border-radius: 3px;
+    margin: 30px auto;
+    cursor: pointer;
+    z-index: 6;
+    position: absolute;
+    top: 62%;
+    left: 51%;
+    transform: translate(-50%, -50%);
+    outline: none;
+}
+
+
+.upload_label > i {
+    color: #FF1384;
+    font-size: 110px;
+    margin: 30px 0;
+}
+
+.drag_text {
+    color: #139CFF;
+    font-size: 22px;
+    margin: 30px 0 0 0;
+}
+
+
+.image > img {
+    padding: 40px;
+    width: 80%;
+    height: auto;
+    position: absolute;
+    left: 10%;
+    top: 0;
+}
+
+.content-table{
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0,9em;
+    min-width: 400px;
+}
+
+.content-table thead tr {
+    background-color: #009879;
+    color:#fff;
+    font-weight: bold;
+}
+
+.content-table th,
+.content-table td {
+    padding: 12px 15px;
+    text-align: center;
+}
+
+.content-table tbody tr {
+    border-bottom: 1px solid #dddddd ;
+}
+
+
+
+-------------------------------------------
+JavaScript
+
+
+
+let input = document.getElementById("btn");
+
+input.addEventListener("click",() => {
+    const filamount = parseFloat(document.getElementById("filamount").value);
+    const filprice = parseFloat(document.getElementById("filprice").value);
+    const time = parseFloat(document.getElementById("time").value);
+    const labor = parseFloat(document.getElementById("labor").value);
+    const printpower = parseFloat(document.getElementById("printpower").value);
+    const printprice = parseFloat(document.getElementById("printprice").value);
+    const markup = parseFloat(document.getElementById("markup").value);
+    const number = parseFloat(document.getElementById("printnumber").value);
+    const electriccost = time*printpower;
+    const filamentcost = (filamount*filprice/1000);
+    const printercost = (printprice*time);
+    const wastage = parseFloat(document.getElementById("wastage").value);
+    const taxes = parseFloat(document.getElementById("tax").value);
+
+    if (labor === "" || isNaN(labor) || (labor <= 0)) {
+        price = (((((filamentcost+electriccost+printercost)*markup/100)+(filamentcost+electriccost+printercost))*wastage)*(1+taxes/100))*number;
+    }
+    else{
+        price = (((((filamentcost+electriccost+printercost+labor)*markup/100)+(filamentcost+electriccost+printercost+labor))*wastage)*(1+taxes/100))*number;
+    }
+    if (isNaN(price)){
+
+    }
+    else{
+        let tabcst = document.getElementById("tabcst");
+        tabcst.checked = true;
+        tabcst.scroll = 0;
+        document.getElementById("output").innerHTML = price + "$";
+        document.getElementById("materialcost").innerHTML = filamentcost + "$";
+        document.getElementById("electriccost").innerHTML = electriccost + "$";
+        document.getElementById("printercost").innerHTML = printercost + "$";
+    }
+    if (labor === "" || isNaN(labor) || (labor <= 0)) {
+        document.getElementById("laborcost").innerHTML = "0$";
+        document.getElementById("final").innerHTML = (filamentcost + electriccost + printercost) + "$";
+        document.getElementById("final2").innerHTML = (filamentcost + electriccost + printercost)*number + "$" + "(" + number + ")";
+        document.getElementById("final3").innerHTML = price + "$" + "(%" + markup + ")";
+        document.getElementById("taxes").innerHTML = (((((filamentcost+electriccost+printercost)*markup/100)+(filamentcost+electriccost+printercost))*wastage)*(1+taxes/100)) + "$";
+    }
+    else {
+        document.getElementById("laborcost").innerHTML = labor + "$";
+        document.getElementById("final").innerHTML = (filamentcost + electriccost + printercost + labor) + "$";
+        document.getElementById("final2").innerHTML = (filamentcost + electriccost + printercost + labor)*number + "$" + "(" + number + ")";
+        document.getElementById("final3").innerHTML = price + "$" + "(%" + markup + ")";
+        document.getElementById("taxes").innerHTML = (((((filamentcost+electriccost+printercost+labor)*markup/100)+(filamentcost+electriccost+printercost+labor))*wastage)*(1+taxes/100)) + "$";
+    }
+});
